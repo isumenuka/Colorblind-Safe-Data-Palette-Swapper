@@ -1,0 +1,1 @@
+Apply a total colorblindness (monochromacy) safe transformation: render all chart areas in high-contrast grayscale with distinguishable pattern fills for each category.

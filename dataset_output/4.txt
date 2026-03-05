@@ -1,0 +1,1 @@
+Edit the chart colors to a deuteranopia-friendly palette (blue/orange high contrast) without changing any labels, data, or layout.
