@@ -1,1 +1,0 @@
-Apply WCAG-compliant deuteranopia color correction to this chart: substitute conflicting red-green hues with high-contrast blue and orange alternatives.

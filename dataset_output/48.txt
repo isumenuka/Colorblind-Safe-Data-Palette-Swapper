@@ -1,1 +1,0 @@
-Convert the color palette of this data visualization to be safe for protanopia using a blue and yellow scheme.

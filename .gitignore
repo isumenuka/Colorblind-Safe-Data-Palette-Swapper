@@ -1,0 +1,11 @@
+# Compiled python modules
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Generated dataset output
+dataset_output/
+
+# macOS
+.DS_Store

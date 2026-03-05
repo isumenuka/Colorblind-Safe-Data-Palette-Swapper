@@ -1,1 +1,0 @@
-Apply WCAG-compliant protanopia color correction: replace red-dominant hues with blue, yellow, and neutral tones while keeping all labels, values, and structure unchanged.

@@ -1,1 +1,0 @@
-Edit this data visualization for monochromacy accessibility by converting to a high-contrast grayscale palette with unique hatch patterns per data series.

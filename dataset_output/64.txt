@@ -1,1 +1,0 @@
-Apply a monochromacy-safe redesign: use only black, white and grays with strong luminance contrast, plus distinct pattern fills (striped, dotted, crosshatched) per data element.

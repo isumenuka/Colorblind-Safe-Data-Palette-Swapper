@@ -1,1 +1,0 @@
-Apply a protanopia-safe color transformation: replace conflicting colors with distinguishable blue and yellow tones while keeping the chart structure intact.

@@ -1,1 +1,0 @@
-Repalette this data visualization for red-green colorblind viewers: apply a deuteranopia-safe blue-orange scheme without modifying chart structure or values.

@@ -1,1 +1,0 @@
-Transform the chart's color encoding to be deuteranopia-accessible using a blue and orange palette inspired by the Wong colorblind-safe set.

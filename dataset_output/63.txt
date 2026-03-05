@@ -1,1 +1,0 @@
-Transform this data visualization to a high-contrast grayscale palette with distinct cross-hatching and pattern fills for each section, preserving all chart geometry and labels.
