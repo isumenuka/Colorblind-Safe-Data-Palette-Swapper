@@ -1,1 +1,0 @@
-Transform the red and green areas of the chart in Image 1 into the blue and orange tones shown in Image 2, maintaining exact structural consistency.

@@ -17,10 +17,10 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 IMG_SIZE   = 1024       # pixels — both width and height (square)
 DPI        = 96         # screen DPI; matplotlib figsize is set from IMG_SIZE/DPI
 FIG_INCHES = IMG_SIZE / DPI   # ~10.67 inches — used for all figure sizes
-JPG_QUALITY = 95
+JPG_QUALITY = 80
 
 # ---------------------------------------------------------------------------
 # DATASET SIZE
-# Quality over quantity: 30 pairs × 3 modes = 90 pristine training examples.
+# 14 pairs x 3 modes = 42 (We will truncate to exactly 40 in main.py)
 # ---------------------------------------------------------------------------
-PAIRS_PER_MODE = 30
+PAIRS_PER_MODE = 14

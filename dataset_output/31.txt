@@ -1,1 +1,0 @@
-Recolor the chart in Image 1 using the protanopia-safe palette from Image 2. Do not alter any axes, legends, or data values.

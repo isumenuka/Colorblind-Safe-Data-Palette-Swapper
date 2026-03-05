@@ -1,1 +1,0 @@
-Use the color swatch in Image 2 to replace the colors in Image 1, making it protanopia-friendly. All text and shapes must remain strictly unchanged.

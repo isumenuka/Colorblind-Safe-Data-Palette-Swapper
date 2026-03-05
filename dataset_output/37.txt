@@ -1,1 +1,0 @@
-Convert the color scheme of Image 1 to the safe blue-yellow palette in Image 2. All data points and labels must remain exactly as they are.

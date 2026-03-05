@@ -1,1 +1,0 @@
-Transform the colored chart in Image 1 into a grayscale version based on Image 2, applying distinct textures to each category for accessibility.
