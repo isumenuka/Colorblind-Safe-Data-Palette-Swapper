@@ -1,0 +1,1 @@
+Following the grayscale key in Image 2, replace the colors in Image 1 and apply distinct pattern fills, while keeping the layout and typography absolutely intact.

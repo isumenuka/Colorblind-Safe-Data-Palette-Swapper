@@ -1,0 +1,1 @@
+Apply the grayscale palette from Image 2 to the data visualization in Image 1, adding hatching patterns (lines, dots, crosses) while preserving chart geometry.

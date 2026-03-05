@@ -1,0 +1,1 @@
+Convert the chart in Image 1 to a monochromacy-safe version using the high-contrast grayscale palette from Image 2. Add unique patterns to each section.

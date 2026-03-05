@@ -1,0 +1,1 @@
+Replace the colors in Image 1 with the grayscale tones from Image 2 and add textures like stripes or dots to each area. Preserve the chart's structure perfectly.

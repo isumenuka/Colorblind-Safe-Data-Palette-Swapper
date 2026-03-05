@@ -1,0 +1,1 @@
+Use the color swatch in Image 2 as a reference to replace the inaccessible colors in Image 1. All text and shapes must remain unchanged.

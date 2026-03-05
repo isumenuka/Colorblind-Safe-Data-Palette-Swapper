@@ -1,0 +1,1 @@
+Replace the hues causing protanopia confusion in Image 1 with the clear palette from Image 2, preserving the chart's structure perfectly.

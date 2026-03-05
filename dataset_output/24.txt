@@ -1,0 +1,1 @@
+Replace the chart colors in Image 1 with the color palette in Image 2, keeping all text, data, and geometric structures absolutely unchanged.

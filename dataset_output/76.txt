@@ -1,0 +1,1 @@
+Map the colors of the chart in Image 1 to the grayscale palette provided in Image 2, adding distinguishable textures to all elements without modifying chart geometry.

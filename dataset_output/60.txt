@@ -1,0 +1,1 @@
+Apply the high-contrast blue and yellow palette from Image 2 to the data visualization in Image 1, preserving the exact same chart geometry.

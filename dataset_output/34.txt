@@ -1,0 +1,1 @@
+Map the colors of the chart in Image 1 to the accessible palette provided in Image 2 without modifying any geometric or text elements.

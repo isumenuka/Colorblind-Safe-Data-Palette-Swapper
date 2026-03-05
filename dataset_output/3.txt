@@ -1,0 +1,1 @@
+Convert the color scheme of Image 1 to the accessible blue-orange palette in Image 2. All data points, legends, and labels must stay exactly the same.

@@ -1,0 +1,1 @@
+Replace the chart colors in Image 1 with the grayscale palette in Image 2, and add distinct texture fills to each data area, keeping all text and geometry unchanged.

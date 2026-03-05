@@ -1,0 +1,1 @@
+Use the grayscale color swatch in Image 2 as a reference to recolor Image 1. Add different patterns to each data series without modifying any text or shapes.

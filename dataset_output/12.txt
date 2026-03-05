@@ -1,0 +1,1 @@
+Apply the high-contrast deuteranopia-safe palette from Image 2 to the data visualization in Image 1, preserving identical chart geometry.

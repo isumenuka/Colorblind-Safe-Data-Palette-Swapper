@@ -1,0 +1,1 @@
+Convert the color scheme of Image 1 to the highly separated grayscale palette in Image 2, and overlay unique texture fills on each segment.
