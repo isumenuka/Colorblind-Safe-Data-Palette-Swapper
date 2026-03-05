@@ -1,0 +1,1 @@
+Convert this chart to a monochromacy-safe design: apply a well-spaced grayscale palette with unique hatch patterns (lines, dots, crosses) so each segment is distinguishable without color.

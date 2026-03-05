@@ -1,0 +1,1 @@
+Apply a protanopia-safe palette transformation using blue and yellow hues to replace all inaccessible red-based colors in this chart.

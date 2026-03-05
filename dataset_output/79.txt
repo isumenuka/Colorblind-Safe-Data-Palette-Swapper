@@ -1,0 +1,1 @@
+Repalette this data visualization for monochromacy accessibility: render in rich high-contrast grayscale with distinct hatching patterns so all segments are visually separable without color.

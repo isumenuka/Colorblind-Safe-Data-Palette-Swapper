@@ -1,1 +1,1 @@
-Recolor this chart to a high-contrast deuteranopia-accessible blue-orange palette. Do not alter any text, shapes, or data points.
+This chart uses red-green colors that are indistinguishable for deuteranopia. Remap the palette to a blue and orange scheme while preserving all visual structure.

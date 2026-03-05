@@ -1,0 +1,1 @@
+Transform this data visualization to a protanopia-safe blue and yellow color palette, preserving all chart geometry, labels, and data values exactly.

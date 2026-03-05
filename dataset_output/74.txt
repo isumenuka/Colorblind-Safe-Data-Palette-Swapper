@@ -1,0 +1,1 @@
+Convert this colored chart to be accessible for total colorblindness: use well-spaced grayscale values and unique repeating pattern fills to differentiate each data group.

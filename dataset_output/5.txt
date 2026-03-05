@@ -1,1 +1,1 @@
-Apply a deuteranopia-safe color transformation: replace red-green conflicting colors with distinguishable blue and orange tones while keeping the chart structure intact.
+Make this chart accessible for deuteranopia users by replacing all red and green tones with a clear blue and orange high-contrast palette, keeping all data intact.

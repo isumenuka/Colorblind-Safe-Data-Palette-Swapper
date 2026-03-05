@@ -1,1 +1,1 @@
-Recolor this chart to a high-contrast protanopia-accessible blue-yellow palette. Do not alter any text, shapes, or data points.
+Convert the color palette of this data visualization to be safe for deuteranopia (red-green colorblindness) using a blue and orange scheme.

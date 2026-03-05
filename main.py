@@ -14,7 +14,7 @@ Colorblind modes supported:
     • Protanopia    → Blue / Yellow high-contrast palette
     • Monochromacy  → High-contrast Grayscale + Pattern fills
 
-Chart types: Pie, Bar (grouped), Line (multi-series), Scatter, Heatmap
+Chart types: Pie, Bar (grouped), Stacked Bar, Line (multi-series), Area (filled), Scatter, Heatmap
 """
 
 import os
@@ -34,7 +34,7 @@ from pathlib import Path
 OUTPUT_DIR = Path("dataset_output")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-PAIRS_PER_MODE = 5           # Number of dataset pairs to generate per colorblind mode
+PAIRS_PER_MODE = 30          # Number of dataset pairs to generate per colorblind mode
 DPI = 150                    # Image resolution (higher = better quality)
 FIG_SIZE = (7, 5)            # Figure dimensions in inches
 JPG_QUALITY = 95             # JPEG quality (1-100)
@@ -50,6 +50,13 @@ STANDARD_PALETTES = [
     ["#D62728", "#2CA02C", "#FF7F0E", "#9467BD", "#8C564B"],   # Matplotlib default
     ["#CC0000", "#00CC00", "#CCCC00", "#006699", "#CC6600"],   # Traffic-light style
     ["#B22222", "#228B22", "#DAA520", "#4169E1", "#DC143C"],   # Earth-red/green
+    ["#FF3333", "#33FF33", "#FF9900", "#3399FF", "#FF33CC"],   # Saturated RGB
+    ["#8B0000", "#006400", "#FFD700", "#00008B", "#8B008B"],   # Dark web-safe
+    ["#F44336", "#4CAF50", "#FFC107", "#2196F3", "#9C27B0"],   # Material Design
+    ["#C0392B", "#27AE60", "#E67E22", "#2980B9", "#8E44AD"],   # Flat UI
+    ["#E74C3C", "#2ECC71", "#F39C12", "#3498DB", "#1ABC9C"],   # Flat UI alt
+    ["#FF6B6B", "#51CF66", "#FFD43B", "#339AF0", "#F06595"],   # Pastel danger
+    ["#D00000", "#007200", "#FFBA08", "#3A86FF", "#8338EC"],   # Bold spectrum
 ]
 
 # Deuteranopia-safe: Blue / Orange / High-contrast
@@ -59,6 +66,13 @@ DEUTERANOPIA_PALETTES = [
     ["#1A5276", "#E67E22", "#2E86C1", "#D35400", "#154360"],
     ["#003F88", "#FCA311", "#00509D", "#E63946", "#023E8A"],
     ["#0072B2", "#E69F00", "#56B4E9", "#D55E00", "#009E73"],   # Wong palette
+    ["#005F73", "#EE9B00", "#94D2BD", "#CA6702", "#001219"],
+    ["#023E8A", "#FB8500", "#0077B6", "#FFB703", "#03045E"],
+    ["#1B4F72", "#F39C12", "#2E86C1", "#E67E22", "#154360"],
+    ["#0A3D62", "#F8A01E", "#1E90FF", "#FF6B35", "#003D5B"],
+    ["#264653", "#E76F51", "#2A9D8F", "#F4A261", "#023047"],
+    ["#0066CC", "#FF8800", "#0044AA", "#FF6600", "#003388"],
+    ["#003566", "#FFC300", "#001D3D", "#FFD60A", "#000814"],
 ]
 
 # Protanopia-safe: Blue / Yellow / Purple distinctions
@@ -68,6 +82,13 @@ PROTANOPIA_PALETTES = [
     ["#0050A0", "#FFD700", "#5DA5DA", "#B276B2", "#60BD68"],
     ["#1B4F72", "#F1C40F", "#154360", "#6C3483", "#1A5276"],
     ["#003049", "#FCBF49", "#D62828", "#F77F00", "#EAE2B7"],
+    ["#4059AD", "#F2DC5D", "#6B4226", "#C9D6DF", "#1E3A5F"],
+    ["#3A0CA3", "#F8961E", "#560BAD", "#F3722C", "#480CA8"],
+    ["#023E8A", "#FFDD00", "#7209B7", "#F72585", "#3A0CA3"],
+    ["#0D47A1", "#FFEB3B", "#4A148C", "#CE93D8", "#1565C0"],
+    ["#1B2A4A", "#E2B33C", "#3B1F8C", "#C4A1D9", "#0D1B2A"],
+    ["#003F88", "#FECB00", "#6A0DAD", "#C9A0DC", "#001F5B"],
+    ["#0047AB", "#FFD700", "#5B2C8C", "#D7A8E0", "#001F7A"],
 ]
 
 # Monochromacy-safe: Grayscale values well-spaced in luminance
@@ -77,10 +98,17 @@ MONOCHROMACY_PALETTES = [
     ["#0D0D0D", "#3D3D3D", "#6E6E6E", "#9E9E9E", "#CFCFCF"],
     ["#111111", "#444444", "#777777", "#AAAAAA", "#DDDDDD"],
     ["#000000", "#333333", "#666666", "#999999", "#CCCCCC"],
+    ["#050505", "#2A2A2A", "#555555", "#808080", "#ABABAB"],
+    ["#0A0A0A", "#383838", "#666666", "#949494", "#C2C2C2"],
+    ["#181818", "#484848", "#787878", "#A8A8A8", "#D8D8D8"],
+    ["#0F0F0F", "#3C3C3C", "#6A6A6A", "#979797", "#C5C5C5"],
+    ["#121212", "#424242", "#727272", "#A2A2A2", "#D2D2D2"],
+    ["#080808", "#303030", "#585858", "#808080", "#A8A8A8"],
+    ["#1F1F1F", "#4F4F4F", "#7F7F7F", "#AFAFAF", "#DFDFDF"],
 ]
 
 # Hatch patterns for monochromacy (textures make sections distinguishable)
-HATCH_PATTERNS = ["", "///", "xxx", "...", "+++", "\\\\\\", "ooo", "***"]
+HATCH_PATTERNS = ["", "///", "xxx", "...", "+++", "\\\\\\\\", "ooo", "***", "--", "||"]
 
 # ---------------------------------------------------------------------------
 # CAPTION TEMPLATES
@@ -92,6 +120,11 @@ DEUTERANOPIA_CAPTIONS = [
     "Apply a deuteranopia-safe color transformation: replace red-green conflicting colors with distinguishable blue and orange tones while keeping the chart structure intact.",
     "Convert the color palette of this data visualization to be safe for deuteranopia (red-green colorblindness) using a blue and orange scheme.",
     "Edit the chart colors to a deuteranopia-friendly palette (blue/orange high contrast) without changing any labels, data, or layout.",
+    "Make this chart accessible for deuteranopia users by replacing all red and green tones with a clear blue and orange high-contrast palette, keeping all data intact.",
+    "Repalette this data visualization for red-green colorblind viewers: apply a deuteranopia-safe blue-orange scheme without modifying chart structure or values.",
+    "This chart uses red-green colors that are indistinguishable for deuteranopia. Remap the palette to a blue and orange scheme while preserving all visual structure.",
+    "Apply WCAG-compliant deuteranopia color correction to this chart: substitute conflicting red-green hues with high-contrast blue and orange alternatives.",
+    "Transform the chart's color encoding to be deuteranopia-accessible using a blue and orange palette inspired by the Wong colorblind-safe set.",
 ]
 
 PROTANOPIA_CAPTIONS = [
@@ -100,6 +133,11 @@ PROTANOPIA_CAPTIONS = [
     "Apply a protanopia-safe color transformation: replace conflicting colors with distinguishable blue and yellow tones while keeping the chart structure intact.",
     "Convert the color palette of this data visualization to be safe for protanopia using a blue and yellow scheme.",
     "Edit the chart colors to a protanopia-friendly palette (blue/yellow high contrast) without changing any labels, data, or layout.",
+    "Make this chart accessible for protanopia users: remap the color palette to a clear blue and yellow high-contrast scheme without altering any data values or positions.",
+    "This visualization relies on red tones that are invisible to protanopia viewers. Apply a blue-yellow replacement palette while preserving all chart geometry.",
+    "Apply a protanopia-safe palette transformation using blue and yellow hues to replace all inaccessible red-based colors in this chart.",
+    "Repalette this chart for protanopia accessibility: distinguish all data series using blue, yellow, and purple tones that are clearly separable for protanopic viewers.",
+    "Apply WCAG-compliant protanopia color correction: replace red-dominant hues with blue, yellow, and neutral tones while keeping all labels, values, and structure unchanged.",
 ]
 
 MONOCHROMACY_CAPTIONS = [
@@ -108,6 +146,11 @@ MONOCHROMACY_CAPTIONS = [
     "Recolor this chart to accessible grayscale and add distinct fill textures (hatching, stippling, or crosshatching) to each data region for monochromacy accessibility.",
     "Apply a total colorblindness (monochromacy) safe transformation: render all chart areas in high-contrast grayscale with distinguishable pattern fills for each category.",
     "Edit this data visualization for monochromacy accessibility by converting to a high-contrast grayscale palette with unique hatch patterns per data series.",
+    "Transform this chart for achromatopsia (monochromacy) viewers: replace all colors with highly separated grayscale tones and add distinct texture fills to each segment.",
+    "Make this visualization accessible for monochromacy users by converting to grayscale and adding unique hatch textures (diagonal lines, dots, crosshatch, pluses) per category.",
+    "Apply a monochromacy-safe redesign: use only black, white and grays with strong luminance contrast, plus distinct pattern fills (striped, dotted, crosshatched) per data element.",
+    "Convert this colored chart to be accessible for total colorblindness: use well-spaced grayscale values and unique repeating pattern fills to differentiate each data group.",
+    "Repalette this data visualization for monochromacy accessibility: render in rich high-contrast grayscale with distinct hatching patterns so all segments are visually separable without color.",
 ]
 
 # ---------------------------------------------------------------------------
@@ -123,6 +166,16 @@ CHART_LABELS_POOL = [
     ["Category A", "Category B", "Category C", "Category D", "Category E"],
     ["North", "South", "East", "West", "Central"],
     ["Jan–Mar", "Apr–Jun", "Jul–Sep", "Oct–Dec", "Full Year"],
+    ["Approved", "Pending", "Rejected", "On Hold", "Escalated"],
+    ["Segment 1", "Segment 2", "Segment 3", "Segment 4", "Segment 5"],
+    ["Male", "Female", "Non-Binary", "Other", "N/A"],
+    ["2020", "2021", "2022", "2023", "2024"],
+    ["Budget", "Actual", "Forecast", "Variance", "Target"],
+    ["Product A", "Product B", "Product C", "Product D", "Product E"],
+    ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
+    ["Under 18", "18–34", "35–54", "55–69", "70+"],
+    ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    ["Alpha", "Beta", "Gamma", "Delta", "Epsilon"],
 ]
 
 def random_labels(n=5):
@@ -323,7 +376,58 @@ def draw_heatmap(ax, fig, colors, hatches=None, title=""):
     fig.patch.set_facecolor("#F8F9FA")
 
 
-CHART_DRAWERS = [draw_pie, draw_bar, draw_line, draw_scatter, draw_heatmap]
+def draw_stacked_bar(ax, fig, colors, hatches=None, title=""):
+    n = random.randint(3, 5)
+    labels = random_labels(n)
+    n_series = random.randint(2, 4)
+    series_names = [f"Series {chr(65+i)}" for i in range(n_series)]
+    data = np.array([random_values(n, 5, 50) for _ in range(n_series)])
+    bottom = np.zeros(n)
+    x = np.arange(n)
+
+    for i in range(n_series):
+        bars = ax.bar(x, data[i], bottom=bottom, color=colors[i % len(colors)],
+                      label=series_names[i], edgecolor="white", linewidth=1)
+        if hatches:
+            for bar in bars:
+                bar.set_hatch(hatches[i % len(hatches)])
+        bottom += data[i]
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=9)
+    ax.set_ylabel("Cumulative Value", fontsize=9)
+    ax.legend(fontsize=8, framealpha=0.7)
+    ax.set_title(title or random_title())
+    apply_style(ax, fig)
+
+
+def draw_area(ax, fig, colors, hatches=None, title=""):
+    n_points = random.randint(8, 14)
+    n_series = random.randint(2, 4)
+    x = list(range(1, n_points + 1))
+    series_names = random_labels(n_series)
+    # Build non-overlapping stacked areas
+    base = np.zeros(n_points)
+
+    for i in range(n_series):
+        values = np.abs(np.cumsum(np.random.randint(2, 15, n_points))) + random.randint(5, 20)
+        ax.fill_between(x, base, base + values,
+                        color=colors[i % len(colors)], alpha=0.75,
+                        label=series_names[i])
+        ax.plot(x, base + values, color=colors[i % len(colors)],
+                linewidth=1.2, alpha=0.9)
+        base = base + values
+
+    ax.set_xlabel("Time Point", fontsize=9)
+    ax.set_ylabel("Value", fontsize=9)
+    ax.legend(fontsize=8, framealpha=0.7)
+    ax.set_title(title or random_title())
+    ax.grid(True, alpha=0.2, linestyle="--")
+    apply_style(ax, fig)
+
+
+CHART_DRAWERS = [draw_pie, draw_bar, draw_stacked_bar, draw_line, draw_area, draw_scatter, draw_heatmap]
+
 
 # ---------------------------------------------------------------------------
 # SAVE FIGURE HELPER

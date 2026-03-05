@@ -1,1 +1,1 @@
-Transform this data visualization to a high-contrast grayscale palette with distinct cross-hatching and pattern fills for each section, preserving all chart geometry and labels.
+Edit the chart colors to a deuteranopia-friendly palette (blue/orange high contrast) without changing any labels, data, or layout.

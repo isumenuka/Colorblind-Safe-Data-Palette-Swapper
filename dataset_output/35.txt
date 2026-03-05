@@ -1,0 +1,1 @@
+This visualization relies on red tones that are invisible to protanopia viewers. Apply a blue-yellow replacement palette while preserving all chart geometry.

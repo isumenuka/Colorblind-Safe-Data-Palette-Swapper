@@ -1,0 +1,1 @@
+Make this visualization accessible for monochromacy users by converting to grayscale and adding unique hatch textures (diagonal lines, dots, crosshatch, pluses) per category.

@@ -1,0 +1,1 @@
+Repalette this chart for protanopia accessibility: distinguish all data series using blue, yellow, and purple tones that are clearly separable for protanopic viewers.

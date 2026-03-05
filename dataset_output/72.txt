@@ -1,0 +1,1 @@
+Transform this chart for achromatopsia (monochromacy) viewers: replace all colors with highly separated grayscale tones and add distinct texture fills to each segment.

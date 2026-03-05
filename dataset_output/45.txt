@@ -1,0 +1,1 @@
+Make this chart accessible for protanopia users: remap the color palette to a clear blue and yellow high-contrast scheme without altering any data values or positions.

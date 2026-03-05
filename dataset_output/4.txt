@@ -1,1 +1,1 @@
-Edit the chart colors to a deuteranopia-friendly palette (blue/orange high contrast) without changing any labels, data, or layout.
+Transform the chart's color encoding to be deuteranopia-accessible using a blue and orange palette inspired by the Wong colorblind-safe set.

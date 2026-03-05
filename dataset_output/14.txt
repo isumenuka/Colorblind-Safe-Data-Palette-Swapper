@@ -1,1 +1,1 @@
-Apply a total colorblindness (monochromacy) safe transformation: render all chart areas in high-contrast grayscale with distinguishable pattern fills for each category.
+Make this chart accessible for deuteranopia users by replacing all red and green tones with a clear blue and orange high-contrast palette, keeping all data intact.

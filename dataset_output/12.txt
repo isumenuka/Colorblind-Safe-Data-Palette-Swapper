@@ -1,1 +1,1 @@
-Edit this data visualization for monochromacy accessibility by converting to a high-contrast grayscale palette with unique hatch patterns per data series.
+Convert the color palette of this data visualization to be safe for deuteranopia (red-green colorblindness) using a blue and orange scheme.
