@@ -138,6 +138,29 @@ def random_title():
     suffixes = ["Analysis", "Overview", "by Region", "by Category", "Summary", "Breakdown", "Report"]
     return f"{random.choice(subjects)} {random.choice(suffixes)}"
 
+
+# ---------------------------------------------------------------------------
+# CONTRAST HELPER — WCAG luminance-based readable text color
+# ---------------------------------------------------------------------------
+
+def text_color_for_bg(hex_color: str) -> str:
+    """
+    Returns '#FFFFFF' (white) or '#111111' (near-black) depending on which
+    gives better contrast against the given background hex color.
+    Uses WCAG relative luminance formula.
+    """
+    hex_color = hex_color.lstrip("#")
+    if len(hex_color) == 3:
+        hex_color = "".join(c * 2 for c in hex_color)
+    r, g, b = (int(hex_color[i:i+2], 16) / 255.0 for i in (0, 2, 4))
+    # Linearise sRGB
+    def lin(c):
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    L = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+    # White contrast ratio vs dark text contrast ratio
+    return "#FFFFFF" if L < 0.179 else "#111111"
+
+
 # ---------------------------------------------------------------------------
 # CHART DRAWING FUNCTIONS
 # ---------------------------------------------------------------------------
@@ -177,9 +200,19 @@ def draw_pie(ax, fig, colors, hatches=None, title=""):
             wedgeprops=wedge_props, pctdistance=0.75
         )
 
-    for autotext in autotexts:
+    # Set contrast-aware text color for EACH wedge independently
+    for wedge, autotext, label_text in zip(wedges, autotexts, texts):
+        bg = wedge.get_facecolor()          # RGBA tuple from matplotlib
+        # Convert RGBA (0-1) back to hex so we can use our helper
+        r, g, b = int(bg[0]*255), int(bg[1]*255), int(bg[2]*255)
+        bg_hex = f"#{r:02X}{g:02X}{b:02X}"
+        fg = text_color_for_bg(bg_hex)
         autotext.set_fontsize(8)
-        autotext.set_color("#222222")
+        autotext.set_color(fg)
+        autotext.set_fontweight("bold")
+        # Outer label: always use #222222 since it floats on the fig background
+        label_text.set_color("#222222")
+        label_text.set_fontsize(8.5)
     ax.set_title(title or random_title())
     fig.patch.set_facecolor("#F8F9FA")
 
@@ -271,10 +304,19 @@ def draw_heatmap(ax, fig, colors, hatches=None, title=""):
     ax.set_yticks(range(n_rows))
     ax.set_yticklabels(row_labels, fontsize=8)
 
-    for r in range(n_rows):
-        for c in range(n_cols):
-            ax.text(c, r, str(data[r, c]), ha="center", va="center",
-                    fontsize=7, color="white" if data[r, c] < 50 else "black")
+    # Get the actual rendered color for each cell and pick a contrasting text
+    norm = plt.Normalize(vmin=data.min(), vmax=data.max())
+    for row_i in range(n_rows):
+        for col_i in range(n_cols):
+            cell_val = data[row_i, col_i]
+            rgba = cmap(norm(cell_val))          # RGBA 0-1
+            r_int = int(rgba[0] * 255)
+            g_int = int(rgba[1] * 255)
+            b_int = int(rgba[2] * 255)
+            cell_hex = f"#{r_int:02X}{g_int:02X}{b_int:02X}"
+            fg = text_color_for_bg(cell_hex)
+            ax.text(col_i, row_i, str(cell_val), ha="center", va="center",
+                    fontsize=7, color=fg, fontweight="bold")
 
     plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
     ax.set_title(title or random_title())
